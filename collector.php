@@ -1,24 +1,19 @@
 <?php
-
-define("BASE_PATH", __DIR__ . DIRECTORY_SEPARATOR);
+// hi im J
+define("BASE" , __DIR__ . DIRECTORY_SEPARATOR);
 
 class collector
 {
 
     public ?array $folders =  [
-        "publ/",
-        "core/helper/",
-        "bots/",
-        "bots/webhook/",
-
-
-
+        "core/functions/",
     ];
     public ?string $state;
 
     function __construct($bot_name = "")
     {
         $this->buildApp();
+        $this->collectRequest();
     }
     public function collectRequest()
     {
@@ -30,8 +25,8 @@ class collector
         }
 
 
-        if (file_exists(BASE_PATH . "public/webhook/$b.bot.php")) {
-            $request_file = BASE_PATH . "public/webhook/$b.bot.php";
+        if (file_exists(BASE . "public/webhook/$b.bot.php")) {
+            $request_file = BASE . "public/webhook/$b.bot.php";
 
             include_once($request_file);
 
@@ -40,6 +35,9 @@ class collector
             $this->state = "GET request found but noting to call.";
 
         }
+
+        echo $this->state;
+
     }
 
 
@@ -48,11 +46,15 @@ class collector
 
 
 
-    public static function buildApp()
+    public function buildApp()
     {
-        foreach (self::$folders as $folder) {
-            if (!file_exists(BASE_PATH . $folder)) {
-                mkdir(BASE_PATH . $folder);
+
+        require_once BASE . "public/vendor/autoload.php";
+        require_once BASE . "core/bot/bot.php";
+
+        foreach ($this->folders as $folder) {
+            if (!file_exists(BASE . $folder)) {
+                mkdir(BASE . $folder);
             }
         }
         $this->_load_robot();
@@ -65,10 +67,10 @@ class collector
     }
     public function _load_robot()
     {
-
-
-        foreach (self::$folders as $folder) {
-            self::_include_php(BASE_PATH . $folder);
+        foreach ($this->folders as $folder) {
+            $this->_include_php(BASE . $folder);
         }
     }
 }
+
+new collector;
