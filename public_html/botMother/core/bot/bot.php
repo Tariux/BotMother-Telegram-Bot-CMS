@@ -33,11 +33,12 @@ class bot extends collector {
 
     }
 
-
-    public function onCommand($command , callable $callback)
+    public function onCommand($command)
     {
         if ($this->input_text == $command) {
-            $callback();
+            return true;
+        } else {
+            return false;
         }
     }
 }

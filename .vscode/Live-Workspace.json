@@ -1,0 +1,24 @@
+
+{
+    "profile": "botMother",
+
+    "protocol": "ftp",
+    "host": "ftp.jaryan01.ir",
+    "port": 21,
+    "user": "me@jaryan01.ir",
+    "password": "DSADSA#0777@",
+    
+    "remotePath": "/public_html/botMother",
+    "uploadOnSave": false,
+    "saveOnCheckIn": false,
+    "clearCacheOnCheckIn": false,
+    
+    "ignore": [
+        "*/.DS_Store",
+        "*/.vscode/*",
+        "*/.git/*",
+        "*/public/vender/*",
+
+        "*/*.LCK"
+    ]
+}
